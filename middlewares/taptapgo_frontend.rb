@@ -1,5 +1,6 @@
 require 'faye/websocket'
 require 'nfc'
+require 'json'
 
 module Taptapgo
 
@@ -11,18 +12,44 @@ module Taptapgo
       @clients = []
 
       # Start NFC Reader
-      # @nfc_context = NFC::Context.new
-      # @nfc_device = @nfc_context.open nil
+      @nfc_context = NFC::Context.new
+      @nfc_device = @nfc_context.open nil
+
+      @current_serial_no = "0";
 
       # Spawn thread
-      # Thread.new do
-      #   while true
-      #     # Poll the device
-      #     @raw_uid = @nfc_device.poll
+      Thread.new do
+        puts "NFC Thread Started"
 
-      #     # Skip to next loop if no result
-      #   end
-      # end
+        while true
+          # Poll the device
+          @card_content = @nfc_device.poll
+
+          # If there is card
+          if @card_content.class == NFC::ISO14443A
+            uid = @card_content.uid.collect! { |x| x.to_s(16) }.reverse!.join.to_i(16).to_s.rjust(10, "0")
+
+            next if @current_serial_no == uid
+
+            puts uid
+            
+            # Mock sending API request
+            @current_serial_no = uid
+            @send_object = {:status_code => 200, :content => uid}.to_json
+            
+            puts @send_object
+
+            @clients.each { |client| client.send(@send_object) }
+
+          # No Card
+          elsif @card_content == -90
+
+            next
+          end
+
+        end
+      end
+
     end
 
     def call(env)

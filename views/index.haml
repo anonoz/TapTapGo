@@ -1,11 +1,42 @@
-!!!5
+!!! 5
 %html{:lang => "en"}
 %head
-	%meta{:charset => "UTF-8"}/
-	%title TapTapGo
+  %meta{:charset => "UTF-8"}
+  %title TapTapGo
 
-    // CSS
-    
+  != css :application
+
+  != js :app
+
 
 %body
-	%h1 Testing
+  .scene#scene0-loading
+    .scene-content
+      %h1 Connecting to TapTapGo
+
+  .scene#scene1-default.hidden
+    .scene-content
+      %h1 Tap A Card
+
+  .scene#scene2-success.hidden
+    .scene-content
+      %h1
+        Welcome 
+        %span#student_name
+
+  .scene#scene3-alreadycheckedin.hidden
+    .scene-content
+      %h1
+        You've Already Checked In
+
+  .scene#scene4-notfound.hidden
+    .scene-content
+      %h1
+        You Are Not In Database
+
+  .scene#scene5-error.hidden
+    .scene-content
+      %h1
+        An Error Has Occured.
+      %h2
+        Contact Someone Now.

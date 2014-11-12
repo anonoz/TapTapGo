@@ -3,12 +3,18 @@ source 'https://rubygems.org'
 ruby '2.1.2'
 
 # Deal with web
-gem 'sinatra'
 gem 'faye-websocket'
 gem 'puma'
 
-# HAML rocks
+# Sinatra
+gem 'sinatra'
+gem 'sinatra-reloader'
+gem 'sinatra-assetpack', :require => 'sinatra/assetpack'
+
+# Hipster Front-end Things
 gem 'haml'
+gem 'coffee-script'
+gem 'sass'
 
 # NFC
 gem 'nfc'

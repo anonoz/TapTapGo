@@ -1,0 +1,53 @@
+html, body
+{
+	height: 100%;
+}
+
+body
+{
+	background: white;
+	font-family: 'Roboto';
+}
+
+.hidden
+{
+	display: none;
+}
+
+.scene
+{
+	width: 100%;
+	height: 100%;
+
+	.scene-content
+	{
+		position: relative;
+		top: 50%;
+		transform: translateY(-50%);
+
+		text-align: center;
+	}
+
+	&#scene2-success
+	{
+		background: #4CAF50;
+	}
+
+    &#scene3-alreadycheckedin
+    {
+    	background: #FFC107;
+    }
+
+    &#scene4-notfound
+    {
+    	background: #424242;
+    	color: white;
+    }
+
+    &#scene5-error
+    {
+    	background: #F44336;
+    	color: white;
+    }
+
+}
