@@ -7,5 +7,8 @@ gem 'sinatra'
 gem 'faye-websocket'
 gem 'puma'
 
+# HAML rocks
+gem 'haml'
+
 # NFC
 gem 'nfc'
