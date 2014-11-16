@@ -16,8 +16,28 @@ body
 
 .scene
 {
-	width: 100%;
-	height: 100%;
+	width: 150%;
+	height: 150%;
+
+	border-radius: 50%;
+
+	position: absolute;
+	left: 50%;
+	top: 50%;
+
+	-webkit-transform: translate(-50%, -50%);
+
+	overflow: hidden;
+
+	&.entry
+	{
+		-webkit-animation: outer-fab-entrance 0.5s;
+	}
+
+	&.exit
+	{
+		-webkit-animation: outer-fab-exit 0.5s;
+	}
 
 	.scene-content
 	{
@@ -26,28 +46,225 @@ body
 		transform: translateY(-50%);
 
 		text-align: center;
+
 	}
 
-	&#scene2-success
+	.outer-fab-anim-shadow
 	{
-		background: #4CAF50;
+		background: rgba(0, 0, 0, 0.44);
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+
+	}
+	
+	.outer-fab
+	{
+		width: 1500px;
+		height: 1500px;
+
+		text-align: center;
+
+		position: relative;
+		top: calc(50% - 750px);
+		left: calc(50% - 750px);
+
+		border-radius: 50%;
+		background: blue;
+		box-shadow: 0 10px 25px 25px rgba(0, 0, 0, 0.22);
+
+		&.entry
+		{
+			-webkit-animation: middle-fab-entrance 0.8s;
+		}
+
+		&.exit
+		{
+			-webkit-animation: middle-fab-entrance 0.8s reverse;
+		}
+
+		.fab-content
+		{
+			position: relative;
+			top: 50%;
+			transform: translateY(-50%);
+
+			.fab-icon
+			{
+				position: relative;
+				left: calc(50% - 444px);
+
+				width: 888px;
+				height: 888px;
+
+				background-position: center;
+				background-repeat: no-repeat;
+
+				&.entry
+				{
+					-webkit-animation: inner-fab-entrance 1.2s;
+				}
+			}
+
+			.h1-buffer
+			{
+				height: 100px;
+			}
+
+			h1
+			{
+				font-size: 70px;
+				overflow: hidden;
+				height: 0px;
+
+				&.entry
+				{
+					-webkit-animation: inner-text-entrance 1.4s;
+					height: 100px;
+				}
+
+				&.exit
+				{
+					-webkit-animation: inner-text-entrance 1.4s reverse;
+					height: 0px;
+				}
+			}
+		}
+	}
+}
+
+#scene1-default
+{
+	background: #607D8B;
+
+	.outer-fab
+	{
+		background: #85D5F7;
 	}
 
-    &#scene3-alreadycheckedin
-    {
-    	background: #FFC107;
-    }
+	.fab-icon
+	{
+		background-image: url(/images/tap-icon.png);
+	}
+}
 
-    &#scene4-notfound
-    {
-    	background: #424242;
-    	color: white;
-    }
+#scene2-success
+{
+	background: #00796B;
 
-    &#scene5-error
-    {
-    	background: #F44336;
-    	color: white;
-    }
+	.outer-fab
+	{
+		background: #BBDFC1;
+	}
 
+	.fab-icon
+	{
+		background-image: url(/images/success-icon.png);
+	}
+}
+
+#scene3-alreadycheckedin
+{
+	background: #FFC107;
+}
+
+#scene4-notfound
+{
+	background: #424242;
+	color: white;
+}
+
+#scene5-error
+{
+	background: #F44336;
+	color: white;
+}
+
+// Animations
+@-webkit-keyframes outer-fab-entrance
+{
+	0%
+	{
+		width: 0px;
+		height: 0px;
+
+		// -webkit-transform: translate(0%, 0%);
+	}
+	
+	100%
+	{
+		width: 2880px;
+		height: 2880px;
+
+		// -webkit-transform: translate(-50%, -50%);
+	}
+}
+
+@-webkit-keyframes middle-fab-entrance
+{
+	0%
+	{
+		-webkit-transform: scale(0, 0);
+	}
+
+	40%
+	{
+		-webkit-transform: scale(0, 0);
+	}
+	
+	100%
+	{
+		-webkit-transform: scale(1, 1);
+	}
+}
+
+@-webkit-keyframes inner-fab-entrance
+{
+	0%
+	{
+		-webkit-transform: scale(0, 0);
+	}
+
+	60%
+	{
+		-webkit-transform: scale(0, 0);
+	}
+	
+	100%
+	{
+		-webkit-transform: scale(1, 1);
+	}
+}
+
+@-webkit-keyframes inner-text-entrance
+{
+	0%
+	{
+		height: 0px;
+	}
+
+	80%
+	{
+		height: 0px;
+	}
+
+	100%
+	{
+		height: 100px;
+	}
+}
+
+@-webkit-keyframes outer-fab-exit
+{
+	0%
+	{
+		width:  2800px;
+		height: 2880px;
+	}
+
+	100%
+	{
+		width:  0%;
+		height: 0%;
+	}
 }

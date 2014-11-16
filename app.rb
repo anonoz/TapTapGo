@@ -24,6 +24,8 @@ module Taptapgo
       css :application, '/css/application.css', [
         '/css/basic.css'
       ]
+
+      puts :FinishingAssetPack
     }
 
     # Actual Business

@@ -8,6 +8,9 @@
 
   != js :app
 
+  / Import Paper elements
+  %link{:rel => "import", :href => "/bower_components/paper-fab/paper-fab.html"}
+
 
 %body
   .scene#scene0-loading
@@ -15,28 +18,36 @@
       %h1 Connecting to TapTapGo
 
   .scene#scene1-default.hidden
-    .scene-content
-      %h1 Tap A Card
+    .outer-fab
+      .fab-content
+        .fab-icon
+        .h1-buffer
+          %h1 Tap To Check In.
+        
 
   .scene#scene2-success.hidden
-    .scene-content
-      %h1
-        Welcome 
-        %span#student_name
+    .outer-fab
+      .fab-content
+        .fab-icon
+        .h1-buffer
+          %h1
+            %span#student_name
+            &nbsp;
+            %span#student_id
 
-  .scene#scene3-alreadycheckedin.hidden
-    .scene-content
-      %h1
-        You've Already Checked In
+  / .scene#scene3-alreadycheckedin.hidden
+  /   .scene-content
+  /     %h1
+  /       You've Already Checked In
 
-  .scene#scene4-notfound.hidden
-    .scene-content
-      %h1
-        You Are Not In Database
+  / .scene#scene4-notfound.hidden
+  /   .scene-content
+  /     %h1
+  /       You Are Not In Database
 
-  .scene#scene5-error.hidden
-    .scene-content
-      %h1
-        An Error Has Occured.
-      %h2
-        Contact Someone Now.
+  / .scene#scene5-error.hidden
+  /   .scene-content
+  /     %h1
+  /       An Error Has Occured.
+  /     %h2
+  /       Contact Someone Now.
