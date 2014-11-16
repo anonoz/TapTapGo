@@ -165,7 +165,17 @@ body
 
 #scene3-alreadycheckedin
 {
-	background: #FFC107;
+	background: #B62025;
+
+	.outer-fab
+	{
+		background: #F8AA91;
+	}
+
+	.fab-icon
+	{
+		background-image: url(/images/fail-icon.png);
+	}
 }
 
 #scene4-notfound

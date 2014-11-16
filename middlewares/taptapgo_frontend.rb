@@ -15,7 +15,8 @@ module Taptapgo
       @nfc_context = NFC::Context.new
       @nfc_device = @nfc_context.open nil
 
-      @current_serial_no = "0";
+      @current_serial_no = "0"
+      @tapped_cards = []
 
       # Spawn thread
       Thread.new do
@@ -35,14 +36,27 @@ module Taptapgo
             
             # Mock sending API request
             @current_serial_no = uid
-            @send_object = {:status_code => 200, :content => uid}.to_json
-            
-            puts @send_object
+            @send_object = nil
 
-            @clients.each { |client| client.send(@send_object) }
+            # has the card been tapped before?
+            if @tapped_cards.include? uid
+              @send_object ||= {:status_code => 409}
+              p [:tapped, @send_object]
+            else
+              @tapped_cards << uid
+            end
+
+            @send_object ||= {:status_code => 200, :content => uid}
+            
+            p @send_object
+            p @tapped_cards
+
+            @clients.each { |client| client.send(@send_object.to_json) }
 
           # No Card
           elsif @card_content == -90
+
+            @current_serial_no = nil
 
             next
           end

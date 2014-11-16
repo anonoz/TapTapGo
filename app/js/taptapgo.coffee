@@ -23,33 +23,36 @@ $(document).ready ->
 
     # Parse status
     if message.status_code == 200 # OK
-      
-      # Clear last anim
-      $('#scene2-success').removeClass('entry exit').hide()
-      clearTimeout window.stillExitingScene2
-
       $('#student_name').text message.content
-      showScene($('#scene2-success'))
-      
-      window.stillExitingScene2 = setTimeout(
-        -> hideScene $('#scene2-success')
-        3000
-      )
+      showScene($('#scene2-success'), true)
+
     
     else if message.status_code == 404 # User Not Found
       $('#scene4-notfound').show()
 
     else if message.status_code == 409 # Already Checked In
-      $('#scene3-alreadycheckedin').show()
+      showScene($('#scene3-alreadycheckedin'), true)
 
     else # OMG ERROR
       $('#scene5-error').show()
 
     return
 
-showScene = ($scene)->
+showScene = ($scene, temporary = false)->
+
+  $('.temporary-scene').hide()
   
-  # play scene animation
+  if temporary
+    # Clear last animation
+    $scene.removeClass('entry exit').hide()
+    clearTimeout window["animation-timeout-#{ $scene[0].id }"]
+  
+    # Set timer
+    window["animation-timeout-#{ $scene[0].id }"] = setTimeout(
+      -> hideScene $scene
+      3000
+    )
+
   # Enlarge scene
   $scene.removeClass('exit').show().addClass('entry')
 

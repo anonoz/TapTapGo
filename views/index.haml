@@ -25,7 +25,7 @@
           %h1 Tap To Check In.
         
 
-  .scene#scene2-success.hidden
+  .scene.temporary-scene#scene2-success.hidden
     .outer-fab
       .fab-content
         .fab-icon
@@ -35,10 +35,12 @@
             &nbsp;
             %span#student_id
 
-  / .scene#scene3-alreadycheckedin.hidden
-  /   .scene-content
-  /     %h1
-  /       You've Already Checked In
+  .scene.temporary-scene#scene3-alreadycheckedin.hidden
+    .outer-fab
+      .fab-content
+        .fab-icon
+        .h1-buffer
+          %h1 You Have Already Checked In.
 
   / .scene#scene4-notfound.hidden
   /   .scene-content

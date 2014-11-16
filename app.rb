@@ -1,7 +1,10 @@
 require 'sinatra/base'
 require 'sinatra/assetpack'
 require 'sinatra/reloader'
+
 require 'haml'
+require 'sass'
+require 'coffee-script'
 
 module Taptapgo
   class Web < Sinatra::Base
