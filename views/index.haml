@@ -9,13 +9,13 @@
   != js :app
 
   / Import Paper elements
-  %link{:rel => "import", :href => "/bower_components/paper-fab/paper-fab.html"}
+  %link{:rel => "import", :href => "/bower_components/paper-spinner/paper-spinner.html"}
 
 
 %body
   .scene#scene0-loading
     .scene-content
-      %h1 Connecting to TapTapGo
+      %paper-progress{:indeterminate => ""}
 
   .scene#scene1-default.hidden
     .outer-fab
@@ -24,6 +24,12 @@
         .h1-buffer
           %h1 Tap To Check In.
         
+  .scene#scene1a-pinging.hidden
+    .outer-fab
+      .fab-content
+        .fab-icon
+          %paper-spinner.paper_spinner{:active => true}
+        .h1-buffer
 
   .scene.temporary-scene#scene2-success.hidden
     .outer-fab
@@ -42,14 +48,16 @@
         .h1-buffer
           %h1 You Have Already Checked In.
 
-  / .scene#scene4-notfound.hidden
-  /   .scene-content
-  /     %h1
-  /       You Are Not In Database
+  .scene.temporary-scene#scene4-notfound.hidden
+    .outer-fab
+      .fab-content
+        .fab-icon
+        .h1-buffer
+          %h1 Not Found
 
-  / .scene#scene5-error.hidden
-  /   .scene-content
-  /     %h1
-  /       An Error Has Occured.
-  /     %h2
-  /       Contact Someone Now.
+  .scene.temporary-scene#scene5-error.hidden
+    .outer-fab
+      .fab-content
+        .fab-icon
+        .h1-buffer
+          %h1 An Error Has Occured

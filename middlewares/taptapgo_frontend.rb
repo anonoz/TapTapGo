@@ -1,5 +1,6 @@
 require 'faye/websocket'
 require 'nfc'
+require 'rest-client'
 require 'json'
 
 module Taptapgo
@@ -28,30 +29,30 @@ module Taptapgo
 
           # If there is card
           if @card_content.class == NFC::ISO14443A
+
+            # Get the card serial no
             uid = @card_content.uid.collect! { |x| x.to_s(16) }.reverse!.join.to_i(16).to_s.rjust(10, "0")
 
+            # If the card is still on the reader we skip the loop
             next if @current_serial_no == uid
-
-            puts uid
-            
-            # Mock sending API request
             @current_serial_no = uid
-            @send_object = nil
 
             # has the card been tapped before?
-            if @tapped_cards.include? uid
-              @send_object ||= {:status_code => 409}
-              p [:tapped, @send_object]
-            else
-              @tapped_cards << uid
-            end
+            # if @tapped_cards.include? uid
+            #   blast :status => 409
+            #   next
+            # end
 
-            @send_object ||= {:status_code => 200, :content => uid}
-            
-            p @send_object
-            p @tapped_cards
+            # Show the user progress bar...
+            blast :status => 100
+              
+            # Check with backend
+            result = checkin uid
 
-            @clients.each { |client| client.send(@send_object.to_json) }
+            # Record the card into tapped cards
+            # @tapped_cards << uid if [200, 409].include? result[:status].to_i
+
+            blast result
 
           # No Card
           elsif @card_content == -90
@@ -94,6 +95,20 @@ module Taptapgo
       else
       	@app.call(env)
       end
+    end
+
+    def checkin(serial_no)
+
+      # Checkin
+      result = RestClient.get ("https://nfc:nfc@nfcbackend.herokuapp.com/checkin/#{ serial_no }")
+      JSON.parse result
+
+    end
+
+    def blast(object)
+
+      @clients.each { |client| client.send(object.to_json) }
+
     end
 
   end

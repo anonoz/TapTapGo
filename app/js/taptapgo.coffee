@@ -21,20 +21,24 @@ $(document).ready ->
     message = JSON.parse e.data
     console.log message
 
+    $('#scene1a-pinging').hide()
+
     # Parse status
-    if message.status_code == 200 # OK
+    if message.status == 200 # OK
       $('#student_name').text message.content
-      showScene($('#scene2-success'), true)
+      showScene $('#scene2-success'), true
 
+    else if message.status == 100 # Pinging backend
+      $('#scene1a-pinging').show()
     
-    else if message.status_code == 404 # User Not Found
-      $('#scene4-notfound').show()
+    else if message.status == 404 # User Not Found
+      showScene $('#scene4-notfound'), true
 
-    else if message.status_code == 409 # Already Checked In
-      showScene($('#scene3-alreadycheckedin'), true)
+    else if message.status == 409 # Already Checked In
+      showScene $('#scene3-alreadycheckedin'), true
 
     else # OMG ERROR
-      $('#scene5-error').show()
+      showScene $('#scene5-error'), true
 
     return
 

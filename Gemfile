@@ -5,6 +5,7 @@ ruby '2.1.2'
 # Deal with web
 gem 'faye-websocket'
 gem 'puma'
+gem 'rest-client'
 
 # Sinatra
 gem 'sinatra'

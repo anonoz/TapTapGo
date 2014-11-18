@@ -31,12 +31,12 @@ body
 
 	&.entry
 	{
-		-webkit-animation: outer-fab-entrance 0.5s;
+		-webkit-animation: outer-fab-entrance 0.8s;
 	}
 
 	&.exit
 	{
-		-webkit-animation: outer-fab-exit 0.5s;
+		-webkit-animation: outer-fab-exit 0.8s;
 	}
 
 	.scene-content
@@ -148,6 +148,27 @@ body
 	}
 }
 
+#scene1a-pinging
+{
+	@extend #scene1-default;
+
+	.fab-icon
+	{
+		background: none;
+	}
+
+	.paper_spinner
+	{
+		width: 900px;
+		height: 900px;
+
+		&::shadow .circle
+		{
+			border-width: 30px;
+		}
+	}
+}
+
 #scene2-success
 {
 	background: #00796B;
@@ -165,6 +186,26 @@ body
 
 #scene3-alreadycheckedin
 {
+	background: #F68E1E;
+
+	.outer-fab
+	{
+		background: #FEE47F;
+	}
+
+	.fab-icon
+	{
+		background-image: url(/images/warning-icon.png);
+	}
+
+	h1
+	{
+		font-size: 60px;
+	}
+}
+
+#scene4-notfound
+{
 	background: #B62025;
 
 	.outer-fab
@@ -178,16 +219,9 @@ body
 	}
 }
 
-#scene4-notfound
-{
-	background: #424242;
-	color: white;
-}
-
 #scene5-error
 {
-	background: #F44336;
-	color: white;
+	@extend #scene4-notfound;
 }
 
 // Animations
@@ -203,8 +237,8 @@ body
 	
 	100%
 	{
-		width: 2880px;
-		height: 2880px;
+		width: 5760px;
+		height: 5760px;
 
 		// -webkit-transform: translate(-50%, -50%);
 	}
